@@ -1,26 +1,26 @@
 let contenedorPersonajes = document.getElementById("contenedorPersonajes");
 let busquedaUsuario = document.getElementById("busquedaUsuario");
-let paginaActual = 1; // Página actual
-let totalPaginas = 1; // Total de páginas
+let paginaActual = 1;
+let totalPaginas = 1;
 
-// Función para cargar todos los personajes
+
 async function cargarTodosLosPersonajes(page = 1, name = "") {
     try {
         const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}&name=${name}`);
         const data = await response.json();
         todosLosPersonajes = data.results || [];
-        totalPaginas = data.info.pages; // Actualizar el total de páginas
+        totalPaginas = data.info.pages;
         mostrarPersonajes(todosLosPersonajes);
         actualizarControlesPaginacion();
     } catch (error) {
         console.error('Error fetching data:', error);
-        contenedorPersonajes.innerHTML = '<p>No se encontraron personajes.</p>';
+        contenedorPersonajes.innerHTML = '<p style="color: white;">No se encontraron personajes.</p>';
     }
 }
 
-// Función para mostrar personajes
+
 function mostrarPersonajes(personajes) {
-    contenedorPersonajes.innerHTML = ''; // Limpiar el contenedor
+    contenedorPersonajes.innerHTML = '';
     
     personajes.forEach(personaje => {
         const personajeDiv = document.createElement('div');
@@ -35,14 +35,14 @@ function mostrarPersonajes(personajes) {
     });
 }
 
-// Función para filtrar personajes en todas las páginas
+
 async function filtrarPersonajes() {
     const textoBusqueda = busquedaUsuario.value.toLowerCase();
-    paginaActual = 1; // Reiniciar a la primera página de resultados
+    paginaActual = 1;
     await cargarTodosLosPersonajes(paginaActual, textoBusqueda);
 }
 
-// Función para actualizar los controles de paginación
+
 function actualizarControlesPaginacion() {
     const controlesDiv = document.getElementById("controlesPaginacion");
     controlesDiv.innerHTML = `
@@ -55,15 +55,11 @@ function actualizarControlesPaginacion() {
     document.getElementById("btnSiguiente").addEventListener("click", () => cambiarPagina(1));
 }
 
-// Función para cambiar de página
 function cambiarPagina(direccion) {
     paginaActual += direccion;
     const textoBusqueda = busquedaUsuario.value.toLowerCase();
     cargarTodosLosPersonajes(paginaActual, textoBusqueda);
 }
 
-// Evento para detectar cuando el usuario escribe
 busquedaUsuario.addEventListener('input', filtrarPersonajes);
-
-// Cargar los personajes al iniciar
 cargarTodosLosPersonajes();
