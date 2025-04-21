@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/style.css">
+    <title>Rick And Morty</title>
+</head>
+<body>
+    <video autoplay muted loop class="videoFondo">
+        <source src="src/assets/rick-2.mp4" type="video/mp4">
+    </video>
+    <div class="FondoOscuro"></div>
+
+    <header>
+        <h1>Rick And Morty</h1>
+    </header>
+    <main>
+        <form action="">
+            <input type="search" placeholder="Buscar Por Personaje.." id="busquedaUsuario">
+            <button type="submit" class="search-button" >
+                <img src="src/assets/search.svg" alt="Buscar Personaje">
+            </button>
+        </form>
+
+        <div class="contenedorPersonajes" id="contenedorPersonajes">
+        </div>
+
+
+        <div id="controlesPaginacion" class="controlesPaginacion">
+            
+        </div>
+    </main>
+
+    <script src="./src/main.js"></script>
+</body>
+</html>
